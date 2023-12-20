@@ -27,32 +27,32 @@ const weatherOptions = [
   {
     url: require("../../images/Day/storm-day.svg").default,
     day: true,
-    type: "stormy",
+    type: "storm-day",
   },
   {
     url: require("../../images/Night/cloudy-night.svg").default,
     day: false,
-    type: "cloudy",
+    type: "cloudy-night",
   },
   {
     url: require("../../images/Night/fog-night.svg").default,
     day: false,
-    type: "foggy",
+    type: "fog-night",
   },
   {
     url: require("../../images/Night/rain-night.svg").default,
     day: false,
-    type: "rainy",
+    type: "rain-night",
   },
   {
     url: require("../../images/Night/snow-night.svg").default,
     day: false,
-    type: "snowy",
+    type: "snow-night",
   },
   {
     url: require("../../images/Night/storm-night.svg").default,
     day: false,
-    type: "stormy",
+    type: "storm-night",
   },
 ];
 
