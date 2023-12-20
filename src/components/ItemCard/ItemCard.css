@@ -1,0 +1,65 @@
+.card__section {
+    font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    height: 328px;
+  }
+  
+  .card__name {
+    position: relative;
+    top: 46px;
+    background-color: white;
+    max-width: 200px;
+    border-radius: 5px;
+    padding: 2px 12px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .card__image {
+    width: 328px;
+    min-height: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-image: cover;
+    cursor: pointer;
+  }
+  
+  .card__items {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 18px;
+    justify-content: center;
+  }
+  
+  @media screen and (min-width: 320px) and (max-width: 425px) {
+    .card__name {
+      font-size: 16px;
+      line-height: 20px;
+      max-width: 90px;
+      max-height: 24px;
+      top: 32px;
+    }
+  
+    .card__image {
+      width: 162px;
+      height: 162px;
+    }
+  
+    .card {
+      height: 162px;
+    }
+  
+    .card__items {
+      margin-top: 18px;
+    }
+  }

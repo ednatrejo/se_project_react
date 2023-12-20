@@ -1,0 +1,11 @@
+.page {
+  padding: 32px 40px;
+  background: rgba(243, 243, 243, 1);
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .page {
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+}
