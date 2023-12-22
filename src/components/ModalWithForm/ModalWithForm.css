@@ -11,7 +11,6 @@
 }
 
 .modal__content {
-  position: relative;
   background-color: white;
   max-width: 496px;
   width: 100%;
@@ -22,6 +21,7 @@
   line-height: 20px;
   font-weight: 700;
   color: black;
+  position: relative;
 }
 
 .modal__close-button {

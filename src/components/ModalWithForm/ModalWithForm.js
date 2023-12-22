@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./ModalWithForm.css";
+import "../ItemCard/ItemCard";
 
 const ModalWithForm = ({
   title,
@@ -32,10 +33,12 @@ const ModalWithForm = ({
         ></button>
         <h3 className="modal__title">{title}</h3>
         <form onSubmit={handleSubmit}>
-          {children}
-          <button className="modal__button" type="submit">
-            Add garment
-          </button>
+          <div key={item._id}>
+            {children}
+            <button className="modal__button" type="submit">
+              Add garment
+            </button>
+          </div>
         </form>
       </div>
     </div>
