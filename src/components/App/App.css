@@ -1,3 +1,19 @@
+.main {
+  padding: 0 20px;
+}
+
+.card_section {
+  margin-top: 20px;
+}
+
+.card_items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .weather {
   position: relative;
 }
@@ -14,29 +30,9 @@
   width: 100%;
 }
 
-.main {
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
   padding: 0 20px;
 }
-
-.card_section {
-  margin-top: 20px;
-}
-
-.card_name {
-  text-align: center;
-}
-
-.card_image {
-  width: 328px;
-  height: 328px;
-  border-radius: 10px;
-}
-
-.card_items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-

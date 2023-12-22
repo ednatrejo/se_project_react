@@ -1,0 +1,21 @@
+/*.modal__card_image {
+width: 100%;
+  height: auto;
+  max-height: 610px;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.modal__content > div {
+  margin-top: 20px;
+}
+
+.modal__description {
+  display: flex;
+  flex-direction: column;
+  margin-left: 34px;
+  column-gap: 12px;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-family: "Cabinet", sans-serif;
+}
