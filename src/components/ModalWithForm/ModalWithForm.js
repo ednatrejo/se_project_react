@@ -33,12 +33,10 @@ const ModalWithForm = ({
         ></button>
         <h3 className="modal__title">{title}</h3>
         <form onSubmit={handleSubmit}>
-          <div key={item._id}>
-            {children}
-            <button className="modal__button" type="submit">
-              Add garment
-            </button>
-          </div>
+          {children}
+          <button className="modal__button" type="submit">
+            Add garment
+          </button>
         </form>
       </div>
     </div>
