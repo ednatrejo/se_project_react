@@ -1,21 +1,109 @@
-/*.modal__card_image {
-width: 100%;
-  height: auto;
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content-card {
+  position: relative;
+  background-color: white;
+  border-radius: 16px;
+  max-width: 498px;
   max-height: 610px;
-  object-fit: cover;
-  max-width: 100%;
-}
-
-.modal__content > div {
-  margin-top: 20px;
-}
-
-.modal__description {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin-left: 34px;
-  column-gap: 12px;
-  gap: 12px;
+  justify-content: center;
+}
+
+.image__close-button {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../images/Image-Modal-Close-Button.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  bottom: calc(100% + -25px);
+  left: calc(100% + -35px);
+}
+
+.modal__image {
+  border-radius: 10px 10px 0px 0px;
+  height: 498px;
+  max-height: 498px;
+}
+
+.modal__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.modal__info {
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: black;
+  margin-left: 32px;
   margin-bottom: 32px;
-  font-family: "Cabinet", sans-serif;
+}
+
+.modal__info-name {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.modal__info-weather {
+  margin-top: 0px;
+  margin-top: 12px;
+}
+
+.modal__delete-button_visible {
+  margin-right: 32px;
+  border: none;
+  background-color: transparent;
+  font-family: "CabinetGrotesk-M", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: rgba(255, 77, 0, 1);
+  cursor: pointer;
+}
+
+.modal__confirm-button {
+  cursor: pointer;
+}
+
+.modal__cancel-button {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .modal__content-card {
+    max-width: 343px;
+    max-height: 463px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .image__close-button {
+    background-image: url("../../images/Mobile-Close-Button.png");
+  }
+
+  .modal__info {
+    margin-left: 16px;
+  }
 }
