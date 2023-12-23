@@ -1,4 +1,6 @@
-
+export const latitude = 32.77;
+export const longitude = 96.79;
+export const APIkey = "a4a372cf5eefc49e73e8a43692b75cf5";
 
 export const defaultClothingItems = [
   {
