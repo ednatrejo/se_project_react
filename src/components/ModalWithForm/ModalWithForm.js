@@ -1,14 +1,15 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 import "./ModalWithForm.css";
-import "../ItemCard/ItemCard";
 
 const ModalWithForm = ({
   title,
   children,
+  buttonText = "Add garment",
   onClose,
   name,
   isOpen,
-  onSubmit,
+  setActiveModal,
 }) => {
   const ref = useRef();
 
@@ -20,7 +21,7 @@ const ModalWithForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    setActiveModal();
   };
 
   return (
@@ -32,10 +33,10 @@ const ModalWithForm = ({
           onClick={onClose}
         ></button>
         <h3 className="modal__title">{title}</h3>
-        <form onSubmit={handleSubmit}>
+        <form setActiveModal={handleSubmit}>
           {children}
           <button className="modal__button" type="submit">
-            Add garment
+            {buttonText}
           </button>
         </form>
       </div>

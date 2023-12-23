@@ -1,6 +1,4 @@
-import "./ItemCard.css";
-
-const ItemCard = ({ item, onSelectCard, defaultClothingItems }) => {
+const ItemCard = ({ item, onSelectCard }) => {
   return (
     <div>
       <div>
