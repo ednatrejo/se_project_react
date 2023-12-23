@@ -5,11 +5,10 @@ import "./ModalWithForm.css";
 const ModalWithForm = ({
   title,
   children,
-  buttonText = "Add garment",
   onClose,
   name,
   isOpen,
-  setActiveModal,
+  onSubmit,
 }) => {
   const ref = useRef();
 
@@ -21,7 +20,7 @@ const ModalWithForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setActiveModal();
+    onSubmit();
   };
 
   return (
@@ -33,10 +32,10 @@ const ModalWithForm = ({
           onClick={onClose}
         ></button>
         <h3 className="modal__title">{title}</h3>
-        <form setActiveModal={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           {children}
           <button className="modal__button" type="submit">
-            {buttonText}
+            Add garment
           </button>
         </form>
       </div>
