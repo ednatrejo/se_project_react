@@ -29,3 +29,99 @@
 .weather_image {
   width: 100%;
 }
+
+.modal__name-input {
+  display: flex;
+
+  flex-direction: column;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+}
+
+.modal__name-submit {
+  display: flex;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+
+  border-bottom-color: black;
+
+  border-bottom-width: 1px;
+
+  border-top: none;
+
+  border-left: none;
+
+  border-right: none;
+
+  padding-top: 8px;
+
+  padding-bottom: 4px;
+
+  font-size: 16px;
+}
+
+.modal__image-input {
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 20px 0px 10px 0;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+}
+
+.modal__image-submit {
+  display: flex;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+
+  border-bottom-color: black;
+
+  border-bottom-width: 1px;
+
+  border-top: none;
+
+  border-left: none;
+
+  border-right: none;
+
+  padding-top: 8px;
+
+  padding-bottom: 4px;
+
+  font-size: 16px;
+}
+
+.radio__input {
+  display: flex;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+
+  padding: 5px 0px 5px 0px;
+
+  align-items: flex-start;
+}
+
+.radio__input:hover {
+  cursor: pointer;
+}
+
+.weather__text {
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  font-weight: 700;
+}

@@ -1,16 +1,26 @@
+// import logo from "../../logo.svg";
+
 import "./App.css";
+
 import Header from "../Header/Header";
+
 import Main from "../Main/Main";
+
 import Footer from "../Footer/Footer";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useEffect, useState } from "react";
+
 import ItemModal from "../ItemModal/ItemModal";
+
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 
+import { useEffect, useState } from "react";
+
 function App() {
-  const weatherTemp = "70° F";
   const [activeModal, setActiveModal] = useState("");
+
   const [selectedCard, setSelectedCard] = useState({});
+
   const [temp, setTemp] = useState(0);
 
   const handleCreateModal = () => {
@@ -23,6 +33,7 @@ function App() {
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
+
     setSelectedCard(card);
   };
 
@@ -30,97 +41,128 @@ function App() {
     getForecastWeather()
       .then((data) => {
         const temperature = parseWeatherData(data);
+
         setTemp(temperature);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+
+      .catch(console.error);
   }, []);
 
+  const handleClick = (evt) => {
+    if (evt.target === evt.currentTarget) {
+      setActiveModal("");
+    }
+  };
+
+  // const handleKeydown = (evt) => {
+
+  //   if (evt.key === "Escape" && activeModal !== "") {
+
+  //     setActiveModal("");
+
+  //   }
+
+  // };
+
   useEffect(() => {
-    if (!activeModal) return;
-    const handleEscapeClose = (e) => {
-      if (e.key === "Escape") {
-        handleCloseModal();
+    const handleKeyDown = (evt) => {
+      if (evt.key === "Escape" && activeModal !== "") {
+        setActiveModal("");
       }
     };
-    document.addEventListener("keydown", handleEscapeClose);
+
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
-      document.removeEventListener("keydown", handleEscapeClose);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeModal]);
 
   return (
     <div>
       <Header onCreateModal={handleCreateModal} />
+
       <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+
       <Footer />
+
       {activeModal === "create" && (
         <ModalWithForm
-          title="New garment"
+          title="New Garment"
           onClose={handleCloseModal}
-          setActiveModal={setActiveModal}
-          // onKeyDown={handleEscapeClose}
+          handleClick={handleClick}
         >
-          <label className="modal__label">
+          <label className="modal__name-input">
+            Name
             <input
-              className="modal__input"
               type="text"
               name="name"
-              placeholder="Name"
-              minLength="2"
+              minlenth="1"
               maxLength="30"
+              placeholder="Name"
+              className="modal__name-submit"
             />
-            <p className="modal__text">Name</p>
           </label>
-          <label className="modal__label">
+
+          <label className="modal__image-input">
+            Image
             <input
-              className="modal__input"
               type="url"
               name="link"
+              minlenth="1"
               placeholder="Image URL"
-              minLength="1"
-              maxLength="30"
+              className="modal__image-submit"
             />
-            <p className="modal__text">Image</p>
           </label>
-          <p className="modal__text">Select the weather type:</p>
+
+          <p className="weather__text">Select the weather type:</p>
+
           <div>
-            <div>
-              <label className="modal__temp-label">Hot</label>
+            <div className="radio__input">
               <input
-                className="modal__radio-button"
                 type="radio"
                 id="hot"
                 value="hot"
-                name="weather"
+                className="radio__button"
+                name="weather-radio-button"
               />
+
+              <label htmlFor="hot">Hot</label>
             </div>
-            <div>
-              <label className="modal__temp-label">Warm</label>
+
+            <div className="radio__input">
               <input
-                className="modal__radio-button"
                 type="radio"
                 id="warm"
                 value="warm"
-                name="weather"
+                name="weather-radio-button"
+                className="radio__button"
               />
+
+              <label htmlFor="warm">Warm</label>
             </div>
-            <div>
-              <label className="modal__temp-label">Cold</label>
+
+            <div className="radio__input">
               <input
-                className="modal__radio-button"
                 type="radio"
                 id="cold"
                 value="cold"
-                name="weather"
+                name="weather-radio-button"
+                className="radio__button"
               />
+
+              <label htmlFor="cold">Cold</label>
             </div>
           </div>
         </ModalWithForm>
       )}
+
       {activeModal === "preview" && (
-        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+        <ItemModal
+          selectedCard={selectedCard}
+          onClose={handleCloseModal}
+          handleClick={handleClick}
+        />
       )}
     </div>
   );
