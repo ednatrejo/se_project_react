@@ -20,7 +20,7 @@ const Header = ({ weatherData, onCreateModal }) => {
           </div>
 
           <div>
-            {currentDate}, {weatherData.city}
+            {currentDate}, {weatherData?.city}
           </div>
         </div>
 

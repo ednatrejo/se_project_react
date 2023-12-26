@@ -10,27 +10,8 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__temp-label {
-  width: 26px;
-  height: 20px;
-  top: 10px;
-  margin-left: 8px;
-}
-
-.modal__radio-button {
-  font-family: "Cabinet Grotesk", "Arial", "sans-serif";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  width: 16px;
-  height: 16px;
-  color: #000;
-  border-radius: 1px;
-  border-color: rgba(0, 0, 0, 0.5);
-  margin-left: 20px;
-}
-
 .modal__content {
+  position: relative;
   background-color: white;
   max-width: 496px;
   width: 100%;
@@ -41,7 +22,6 @@
   line-height: 20px;
   font-weight: 700;
   color: black;
-  position: relative;
 }
 
 .modal__close-button {
