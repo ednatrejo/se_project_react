@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { parseWeatherData } from "../../utils/weatherApi";
+import { parseWeatherData } from "../../utils/WeatherApi";
 import "./Header.css";
 import headerLogo from "../../images/HeaderLogo.svg";
 import avatarImage from "../../images/avatar.svg";
