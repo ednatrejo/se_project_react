@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import {
   getForecastWeather,
   parseWeatherData,
-} from "../../utils/WeatherApi.js";
+} from "../../utils/weatherApi.js";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 import { Switch, Route } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
