@@ -59,7 +59,7 @@ export const weatherOptions = [
     type: "storm-night",
   },
 ];
-const WeatherCard = ({ day, type, weatherTemp = 0 }) => {
+/*const WeatherCard = ({ day, type, weatherTemp = 0 }) => {
   const imageSrc = weatherOptions.filter((i) => {
     return i.day === day && i.type === type;
   });
@@ -74,4 +74,4 @@ const WeatherCard = ({ day, type, weatherTemp = 0 }) => {
   );
 };
 
-export default WeatherCard;
+export default WeatherCard; */
