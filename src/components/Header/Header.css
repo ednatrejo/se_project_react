@@ -3,26 +3,6 @@
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
-  padding: 0 20px;
-}
-
-.header__logo {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.header__avatar-logo {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 60px;
   margin-bottom: 28px;
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
@@ -46,7 +26,6 @@
 .header__button {
   margin-right: 8px;
   border: none;
-  /* background-color: white; */
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
   line-height: 24px;
@@ -69,7 +48,6 @@
 .menu-button {
   width: 44px;
   height: 44px;
-  /* background-image: url("../../images/Mobile\ menu-button.png"); */
   background-repeat: no-repeat;
   background-size: contain;
   border: none;

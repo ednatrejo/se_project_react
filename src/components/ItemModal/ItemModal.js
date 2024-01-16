@@ -18,7 +18,7 @@ const ItemModal = ({ selectedCard, onClose, handleOpenConfirmModal }) => {
           type="button"
           onClick={onClose}
         ></button>
-        <img className="modal__image" src={selectedCard.link} />
+        <img className="modal__image" src={selectedCard.imageUrl} />
         <div className="modal__info-wrapper">
           <div className="modal__info">
             <p className="modal__info-name">{selectedCard.name}</p>
@@ -30,7 +30,9 @@ const ItemModal = ({ selectedCard, onClose, handleOpenConfirmModal }) => {
             type="text"
             className="modal__delete-button_visible"
             onClick={handleOpenConfirmModal}
-          ></button>
+          >
+            Delete Item
+          </button>
         </div>
       </div>
     </div>

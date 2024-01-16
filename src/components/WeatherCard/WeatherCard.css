@@ -1,14 +1,40 @@
 .weather {
   position: relative;
+  margin-bottom: 40px;
 }
 
-.weather_info {
+.weather__info {
   position: absolute;
-  top: 12px;
+  top: 10px;
   left: 16px;
-  color: white;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+  color: white;
 }
-.weather_image {
+
+.weather__image {
   width: 100%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .weather {
+    margin-bottom: 30px;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 11px;
+  }
+
+  .weather__info {
+    z-index: 1;
+    top: 20px;
+  }
+
+  .weather__image {
+    background-image: url("../../images/Night/cloudy-night.svg");
+    height: 80px;
+  }
 }

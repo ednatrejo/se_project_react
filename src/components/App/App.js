@@ -1,27 +1,32 @@
-// import logo from "../../logo.svg";
-
+import logo from "../../logo.svg";
 import "./App.css";
-
 import Header from "../Header/Header";
-
 import Main from "../Main/Main";
-
 import Footer from "../Footer/Footer";
-
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-
 import ItemModal from "../ItemModal/ItemModal";
-
-import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
-
 import { useEffect, useState } from "react";
+import {
+  getForecastWeather,
+  parseWeatherData,
+} from "../../utils/weatherApi.js";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
+import { Switch, Route } from "react-router-dom";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
+import { baseUrl, getItems, addItems, deleteItems } from "../../utils/api.js";
+import { processServerResponse } from "../../utils/Utils.js";
 
 function App() {
+  const weatherTemp = "70° F";
   const [activeModal, setActiveModal] = useState("");
-
   const [selectedCard, setSelectedCard] = useState({});
-
   const [temp, setTemp] = useState(0);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleteCard, setDeleteCard] = useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -33,137 +38,131 @@ function App() {
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
-
     setSelectedCard(card);
+  };
+
+  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
+    addItems({ name, imageUrl, weather })
+      .then((res) => {
+        setClothingItems([res, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
+  };
+
+  const handleOpenConfirmModal = () => {
+    setActiveModal("delete");
+  };
+
+  const handleCloseConfirmModal = () => {
+    setActiveModal("");
+  };
+
+  const handleDeleteItem = () => {
+    console.log(selectedCard._id);
+    setDeleteCard(true);
+    deleteItems(selectedCard._id)
+      .then(() => {
+        const filteredCards = clothingItems.filter((card) => {
+          return card._id !== selectedCard._id;
+        });
+
+        setClothingItems(filteredCards);
+        handleCloseModal();
+        handleCloseConfirmModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setDeleteCard(false);
+      });
   };
 
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
-        const temperature = parseWeatherData(data);
-
-        setTemp(temperature);
+        const weatherData = parseWeatherData(data);
+        setTemp(weatherData);
       })
-
-      .catch(console.error);
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
-  const handleClick = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      setActiveModal("");
-    }
-  };
-
-  // const handleKeydown = (evt) => {
-
-  //   if (evt.key === "Escape" && activeModal !== "") {
-
-  //     setActiveModal("");
-
-  //   }
-
-  // };
+  useEffect(() => {
+    getItems()
+      .then((cards) => {
+        setClothingItems(cards);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
-    const handleKeyDown = (evt) => {
-      if (evt.key === "Escape" && activeModal !== "") {
-        setActiveModal("");
-      }
+    if (!activeModal) return;
+    const handleEscClose = (evt) => {
+      if (evt.key === "Escape") handleCloseModal();
     };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
   return (
-    <div>
-      <Header onCreateModal={handleCreateModal} />
-
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-
-      <Footer />
-
-      {activeModal === "create" && (
-        <ModalWithForm
-          title="New Garment"
-          onClose={handleCloseModal}
-          handleClick={handleClick}
-        >
-          <label className="modal__name-input">
-            Name
-            <input
-              type="text"
-              name="name"
-              minlenth="1"
-              maxLength="30"
-              placeholder="Name"
-              className="modal__name-submit"
+    <div className="page">
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <Header onCreateModal={handleCreateModal} weatherData={temp} />
+        <Switch>
+          <Route exact path="/">
+            <Main
+              weatherTemp={temp}
+              onSelectCard={handleSelectedCard}
+              clothingItems={clothingItems}
             />
-          </label>
+          </Route>
 
-          <label className="modal__image-input">
-            Image
-            <input
-              type="url"
-              name="link"
-              minlenth="1"
-              placeholder="Image URL"
-              className="modal__image-submit"
+          <Route path="/profile">
+            <Profile
+              onCreateModal={handleCreateModal}
+              clothingItems={clothingItems}
+              onSelectCard={handleSelectedCard}
             />
-          </label>
+          </Route>
+        </Switch>
 
-          <p className="weather__text">Select the weather type:</p>
-
-          <div>
-            <div className="radio__input">
-              <input
-                type="radio"
-                id="hot"
-                value="hot"
-                className="radio__button"
-                name="weather-radio-button"
-              />
-
-              <label htmlFor="hot">Hot</label>
-            </div>
-
-            <div className="radio__input">
-              <input
-                type="radio"
-                id="warm"
-                value="warm"
-                name="weather-radio-button"
-                className="radio__button"
-              />
-
-              <label htmlFor="warm">Warm</label>
-            </div>
-
-            <div className="radio__input">
-              <input
-                type="radio"
-                id="cold"
-                value="cold"
-                name="weather-radio-button"
-                className="radio__button"
-              />
-
-              <label htmlFor="cold">Cold</label>
-            </div>
-          </div>
-        </ModalWithForm>
-      )}
-
-      {activeModal === "preview" && (
-        <ItemModal
-          selectedCard={selectedCard}
-          onClose={handleCloseModal}
-          handleClick={handleClick}
-        />
-      )}
+        <Footer />
+        {activeModal === "create" && (
+          <AddItemModal
+            onClose={handleCloseModal}
+            isOpen={activeModal === "create"}
+            onAddItem={handleAddItemSubmit}
+          />
+        )}
+        {activeModal === "preview" && (
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            onDelete={handleOpenConfirmModal}
+            handleOpenConfirmModal={handleOpenConfirmModal}
+          />
+        )}
+        {activeModal === "delete" && (
+          <DeleteConfirmModal
+            handleDeleteItem={handleDeleteItem}
+            handleCloseConfirmModal={handleCloseConfirmModal}
+            selectedCard={selectedCard}
+          />
+        )}
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }

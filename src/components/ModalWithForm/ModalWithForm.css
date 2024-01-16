@@ -10,18 +10,6 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__radio-button {
-  font-family: "Cabinet Grotesk", "Arial", "sans-serif";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  width: 16px;
-  height: 16px;
-  color: #000;
-  border-radius: 1px;
-  border-color: rgba(0, 0, 0, 0.5);
-  margin-left: 20px;
-}
 .modal__content {
   position: relative;
   background-color: white;

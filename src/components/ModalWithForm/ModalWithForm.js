@@ -1,10 +1,8 @@
-import React from "react";
 import { useEffect, useRef } from "react";
 import "./ModalWithForm.css";
 
 const ModalWithForm = ({
   title,
-  buttonText = "Add garment",
   children,
   onClose,
   name,
@@ -36,7 +34,7 @@ const ModalWithForm = ({
         <form onSubmit={handleSubmit}>
           {children}
           <button className="modal__button" type="submit">
-            {buttonText}
+            Add garment
           </button>
         </form>
       </div>
