@@ -16,6 +16,7 @@
 
 .weather__image {
   width: 100%;
+  background-image: url("../../images/Night/cloudy-night.svg");
 }
 
 @media screen and (min-width: 320px) and (max-width: 425px) {
@@ -34,7 +35,6 @@
   }
 
   .weather__image {
-    background-image: url("../../images/Night/cloudy-night.svg");
     height: 80px;
   }
 }
