@@ -18,7 +18,11 @@ const ItemModal = ({ selectedCard, onClose, handleOpenConfirmModal }) => {
           type="button"
           onClick={onClose}
         ></button>
-        <img className="modal__image" src={selectedCard.imageUrl} />
+        <img
+          className="modal__image"
+          alt={selectedCard.name}
+          src={selectedCard.imageUrl}
+        />
         <div className="modal__info-wrapper">
           <div className="modal__info">
             <p className="modal__info-name">{selectedCard.name}</p>

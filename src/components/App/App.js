@@ -60,9 +60,9 @@ function App() {
     setActiveModal("delete");
   };
 
-  const handleCloseConfirmModal = () => {
+  /*const handleCloseConfirmModal = () => {
     setActiveModal("");
-  };
+  }; */
 
   const handleDeleteItem = () => {
     console.log(selectedCard._id);
@@ -75,7 +75,6 @@ function App() {
 
         setClothingItems(filteredCards);
         handleCloseModal();
-        handleCloseConfirmModal();
       })
       .catch((error) => {
         console.log(error);
@@ -158,7 +157,7 @@ function App() {
         {activeModal === "delete" && (
           <DeleteConfirmModal
             handleDeleteItem={handleDeleteItem}
-            handleCloseConfirmModal={handleCloseConfirmModal}
+            handleCloseModal={handleCloseModal}
             selectedCard={selectedCard}
           />
         )}

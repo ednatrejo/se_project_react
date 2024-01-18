@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "../ModalWithForm/ModalWithForm.css";
+import App from "../App/App";
 
 const DeleteConfirmModal = ({
   handleCloseConfirmModal,
@@ -14,9 +15,9 @@ const DeleteConfirmModal = ({
     }
   };
 
-  const handleCancel = () => {
+  /*const handleCancel = () => {
     handleCloseConfirmModal();
-  };
+  };*/
 
   return (
     <div className="modal" onClick={handleOutsideClick}>
@@ -40,7 +41,7 @@ const DeleteConfirmModal = ({
           <button
             className="modal__cancel-button"
             type="button"
-            onClick={handleCancel}
+            onClick={handleCloseConfirmModal}
           >
             Cancel
           </button>
