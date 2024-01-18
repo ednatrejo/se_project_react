@@ -39,7 +39,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
 
   return (
     <main className="main">
-      <WeatherCard day={false} type="cloudy" weatherTemp={temp} />
+      <WeatherCard day={false} type="cloudy-night" weatherTemp={temp} />
       <section className="card__section" id="card-section">
         <div>
           Today is {temp + "\u00B0 " + currentTemperatureUnit} / You may want to
