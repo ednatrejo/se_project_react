@@ -3,7 +3,7 @@ import "../ModalWithForm/ModalWithForm.css";
 import App from "../App/App";
 
 const DeleteConfirmModal = ({
-  handleCloseConfirmModal,
+  handleCloseModal,
   handleDeleteItem,
   selectedCard,
 }) => {
@@ -11,13 +11,13 @@ const DeleteConfirmModal = ({
 
   const handleOutsideClick = (e) => {
     if (ref.current && !ref.current.contains(e.target)) {
-      handleCloseConfirmModal();
+      handleCloseModal();
     }
   };
 
-  /*const handleCancel = () => {
-    handleCloseConfirmModal();
-  };*/
+  const handleCancel = () => {
+    handleCloseModal();
+  };
 
   return (
     <div className="modal" onClick={handleOutsideClick}>
@@ -27,7 +27,7 @@ const DeleteConfirmModal = ({
         <button
           className="modal__close-button"
           type="button"
-          onClick={handleCloseConfirmModal}
+          onClick={handleCloseModal}
           alt="close-button"
         ></button>
         <div className="modal__confirm-buttons">
@@ -41,7 +41,7 @@ const DeleteConfirmModal = ({
           <button
             className="modal__cancel-button"
             type="button"
-            onClick={handleCloseConfirmModal}
+            onClick={handleCancel}
           >
             Cancel
           </button>
