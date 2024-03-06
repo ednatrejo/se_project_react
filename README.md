@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Link to project 13
 
-In the project directory, you can run:
+https://github.com/ednatrejo/se_project_express
 
 ### `npm start`
 

@@ -21,6 +21,7 @@ const Header = ({ weatherData, onCreateModal }) => {
     setMobileMenuOpened(!isMobileMenuOpened);
   };
 
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <header className="header">
       <div className="header__logo-container">
@@ -46,7 +47,7 @@ const Header = ({ weatherData, onCreateModal }) => {
           </button>
         </div>
         <Link className="header__username" to="/profile">
-          {username}
+          src={currentUser?.avatar}
         </Link>
         <div>
           <img
@@ -81,10 +82,10 @@ const Header = ({ weatherData, onCreateModal }) => {
           <div className="mobile__menu">
             <div>
               <div className="mobile__avatar-container">
-                <div>{username}</div>
+                <div>{currentUser?.name}</div>
                 <img
                   className="mobile__avatar-logo"
-                  src={avatarImage}
+                  src={currentUser?.avatar}
                   alt="Avatar Logo"
                 />
               </div>

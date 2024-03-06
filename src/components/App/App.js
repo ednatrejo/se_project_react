@@ -17,6 +17,10 @@ import Profile from "../Profile/Profile";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
 import { baseUrl, getItems, addItems, deleteItems } from "../../utils/api.js";
 import { processServerResponse } from "../../utils/Utils.js";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import * as auth from "../../utils/auth";
+import * as api from "../../utils/api";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function App() {
   const weatherTemp = "70° F";
@@ -84,6 +88,56 @@ function App() {
       });
   };
 
+  //Callback function to register new user
+  function handleRegistration({ email, password, name, avatar }) {
+    setIsLoading(true);
+    auth
+      .registration(email, password, name, avatar)
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          localStorage.setItem("jwt", res.token);
+          auth
+            .checkToken(res.token)
+            .then((data) => {
+              setCurrentUser(data);
+            })
+            .finally(() => {
+              setIsLoading(false);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  //Callback function to log in user
+  function handleLogin({ email, password }) {
+    setIsLoading(true);
+    auth
+      .authorization(email, password)
+      .then((res) => {
+        if (res) {
+          localStorage.setItem("jwt", res.token);
+          auth.checkToken(res.token).then((data) => {
+            setCurrentUser(data.data);
+            setIsLoggedIn(true);
+          });
+        }
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error("Login failed", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
@@ -116,52 +170,54 @@ function App() {
 
   return (
     <div className="page">
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-        <Header onCreateModal={handleCreateModal} weatherData={temp} />
-        <Switch>
-          <Route exact path="/">
-            <Main
-              weatherTemp={temp}
-              onSelectCard={handleSelectedCard}
-              clothingItems={clothingItems}
-            />
-          </Route>
+      <CurrentUserContext.Provider value={{ currentUser }}>
+        <CurrentTemperatureUnitContext.Provider
+          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+        >
+          <Header onCreateModal={handleCreateModal} weatherData={temp} />
+          <Switch>
+            <Route exact path="/">
+              <Main
+                weatherTemp={temp}
+                onSelectCard={handleSelectedCard}
+                clothingItems={clothingItems}
+              />
+            </Route>
 
-          <Route path="/profile">
-            <Profile
-              onCreateModal={handleCreateModal}
-              clothingItems={clothingItems}
-              onSelectCard={handleSelectedCard}
-            />
-          </Route>
-        </Switch>
+            <Route path="/profile">
+              <Profile
+                onCreateModal={handleCreateModal}
+                clothingItems={clothingItems}
+                onSelectCard={handleSelectedCard}
+              />
+            </Route>
+          </Switch>
 
-        <Footer />
-        {activeModal === "create" && (
-          <AddItemModal
-            onClose={handleCloseModal}
-            isOpen={activeModal === "create"}
-            onAddItem={handleAddItemSubmit}
-          />
-        )}
-        {activeModal === "preview" && (
-          <ItemModal
-            selectedCard={selectedCard}
-            onClose={handleCloseModal}
-            onDelete={handleOpenConfirmModal}
-            handleOpenConfirmModal={handleOpenConfirmModal}
-          />
-        )}
-        {activeModal === "delete" && (
-          <DeleteConfirmModal
-            handleDeleteItem={handleDeleteItem}
-            handleCloseModal={handleCloseModal}
-            selectedCard={selectedCard}
-          />
-        )}
-      </CurrentTemperatureUnitContext.Provider>
+          <Footer />
+          {activeModal === "create" && (
+            <AddItemModal
+              onClose={handleCloseModal}
+              isOpen={activeModal === "create"}
+              onAddItem={handleAddItemSubmit}
+            />
+          )}
+          {activeModal === "preview" && (
+            <ItemModal
+              selectedCard={selectedCard}
+              onClose={handleCloseModal}
+              onDelete={handleOpenConfirmModal}
+              handleOpenConfirmModal={handleOpenConfirmModal}
+            />
+          )}
+          {activeModal === "delete" && (
+            <DeleteConfirmModal
+              handleDeleteItem={handleDeleteItem}
+              handleCloseModal={handleCloseModal}
+              selectedCard={selectedCard}
+            />
+          )}
+        </CurrentTemperatureUnitContext.Provider>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
