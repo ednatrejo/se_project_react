@@ -7,6 +7,8 @@ import mobileCloseButton from "../../images/Mobile-Menu-Close-Button.svg";
 import mobileNavButton from "../../images/Mobile-Nav-Button.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Header = ({ weatherData, onCreateModal }) => {
   const currentDate = new Date().toLocaleString("default", {
@@ -21,7 +23,7 @@ const Header = ({ weatherData, onCreateModal }) => {
     setMobileMenuOpened(!isMobileMenuOpened);
   };
 
-  const { currentUser } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   return (
     <header className="header">
       <div className="header__logo-container">

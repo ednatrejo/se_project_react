@@ -20,7 +20,7 @@ import { processServerResponse } from "../../utils/Utils.js";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/api";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function App() {
   const weatherTemp = "70° F";
@@ -31,6 +31,13 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleteCard, setDeleteCard] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    _id: "",
+    name: "",
+    avatar: "",
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -90,21 +97,18 @@ function App() {
 
   //Callback function to register new user
   function handleRegistration({ email, password, name, avatar }) {
-    setIsLoading(true);
     auth
-      .registration(email, password, name, avatar)
+      .registerUser(email, password, name, avatar)
       .then((res) => {
         console.log(res);
         if (res) {
           localStorage.setItem("jwt", res.token);
           auth
-            .checkToken(res.token)
+            .getUserInfo(res.token)
             .then((data) => {
               setCurrentUser(data);
             })
-            .finally(() => {
-              setIsLoading(false);
-            })
+
             .catch((err) => {
               console.error(err);
             });
@@ -117,13 +121,12 @@ function App() {
 
   //Callback function to log in user
   function handleLogin({ email, password }) {
-    setIsLoading(true);
     auth
-      .authorization(email, password)
+      .loginUser(email, password)
       .then((res) => {
         if (res) {
           localStorage.setItem("jwt", res.token);
-          auth.checkToken(res.token).then((data) => {
+          auth.getUserInfo(res.token).then((data) => {
             setCurrentUser(data.data);
             setIsLoggedIn(true);
           });
@@ -133,9 +136,7 @@ function App() {
       .catch((err) => {
         console.error("Login failed", err);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => {});
   }
 
   useEffect(() => {
@@ -170,7 +171,7 @@ function App() {
 
   return (
     <div className="page">
-      <CurrentUserContext.Provider value={{ currentUser }}>
+      <CurrentUserContext.Provider value={currentUser}>
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
