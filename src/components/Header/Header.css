@@ -7,7 +7,7 @@
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: black;
 }
 
@@ -26,10 +26,11 @@
 .header__button {
   margin-right: 8px;
   border: none;
+  background-color: transparent;
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: black;
 }
 
@@ -37,8 +38,30 @@
   cursor: pointer;
 }
 
+.header__buttons {
+  border: none;
+  background-color: transparent;
+  font-family: "Cabinet-Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.header__username {
+  text-decoration: none;
+  color: black;
+}
+
+.header__username:link {
+  color: black;
+}
+
 .header__avatar-logo {
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px;
 }
 
 .navigation-container {
@@ -48,6 +71,7 @@
 .menu-button {
   width: 44px;
   height: 44px;
+  /* background-image: url("../../images/Mobile\ menu-button.png"); */
   background-repeat: no-repeat;
   background-size: contain;
   border: none;
@@ -57,6 +81,9 @@
 
 .mobile__avatar-logo {
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 425px) {

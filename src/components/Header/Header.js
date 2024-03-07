@@ -10,20 +10,24 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const Header = ({ weatherData, onCreateModal }) => {
+const Header = ({
+  weatherData,
+  onCreateModal,
+  isLoggedIn,
+  handleRegisterModal,
+  handleLoginModal,
+}) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-  const username = "Terrence Tegegne";
-  const avatar = "";
-  const [isMobileMenuOpened, setMobileMenuOpened] = useState(false);
 
+  const [isMobileMenuOpened, setMobileMenuOpened] = useState(false);
   const toggleMobileMenu = () => {
     setMobileMenuOpened(!isMobileMenuOpened);
   };
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <header className="header">
       <div className="header__logo-container">
@@ -39,25 +43,36 @@ const Header = ({ weatherData, onCreateModal }) => {
       </div>
       <div className="header__nav">
         <ToggleSwitch />
-        <div>
-          <button
-            className="header__button"
-            type="text"
-            onClick={onCreateModal}
-          >
-            + Add Clothes
-          </button>
-        </div>
-        <Link className="header__username" to="/profile">
-          src={currentUser?.avatar}
-        </Link>
-        <div>
-          <img
-            className="header__avatar-logo"
-            src={avatarImage}
-            alt="Avatar Logo"
-          />
-        </div>
+        {isLoggedIn ? (
+          <>
+            <button
+              className="header__button"
+              type="text"
+              onClick={onCreateModal}
+            >
+              + Add Clothes
+            </button>
+
+            <Link className="header__username" to="/profile">
+              {currentUser?.name}
+            </Link>
+
+            <img
+              className="header__avatar-logo"
+              src={currentUser?.avatar}
+              alt="Profile Image"
+            />
+          </>
+        ) : (
+          <>
+            <button className="header__buttons" onClick={handleRegisterModal}>
+              Sign Up
+            </button>
+            <button className="header__buttons" onClick={handleLoginModal}>
+              Log In
+            </button>
+          </>
+        )}
       </div>
 
       <div
