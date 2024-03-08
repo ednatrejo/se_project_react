@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../hooks/useForm";
 
 const RegisterModal = ({
   handleLoginModal,
