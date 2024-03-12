@@ -11,10 +11,15 @@
 }
 
 .modal__content {
+  max-width: 496px;
+  width: 100%;
+}
+
+.modal__content-form {
   position: relative;
   background-color: white;
   max-width: 496px;
-  width: 100%;
+  /* width: 100%; */
   border-radius: 20px;
   padding: 28px 28px;
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
@@ -27,15 +32,32 @@
 .modal__close-button {
   width: 20px;
   height: 20px;
-  background-image: url("../../images/Form-Close-Button.png");
+  /* background-image: url("../../images/Image\ Modal\ Close\ Button.svg"); */
+  background-image: url("../../images/grey_close_button.svg");
   background-repeat: no-repeat;
   background-size: contain;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  position: absolute;
-  bottom: calc(100% + -37px);
-  left: calc(100% + -38px);
+  position: relative;
+  top: 43px;
+  left: calc(100% + -48px);
+  z-index: 1;
+}
+
+.modal__confirm-close {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../images/grey_close_button.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  top: -40px;
+  left: calc(50% + -2px);
+  z-index: 1;
 }
 
 .modal__title {
@@ -90,11 +112,24 @@ input[type="radio"]:checked + label {
 }
 
 .modal__button:disabled {
-  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.3;
 }
 
 .modal__button:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0.5;
+}
+
+.modal__button-alt {
+  width: 124px;
+  height: 36px;
+  margin-top: 34px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  border-radius: 4px;
+  color: grey;
+  cursor: pointer;
+  text-align: center;
+  border: none;
 }
 
 .modal__confirm-content {

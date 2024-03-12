@@ -1,29 +1,45 @@
+import React, { useEffect } from "react";
 import "./ItemCard.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useState, useContext } from "react";
+import likeButton from "../../images/likeButton.svg";
+import likeButtonActive from "../../images/likeButtonActive.svg";
 
-const ItemCard = ({ item, onSelectCard, onCardLike }) => {
-  //Check if the item was liked by the current user
-  // The likes array should be an array of ids
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+const ItemCard = ({ item, onSelectCard, isLoggedIn, onCardLike }) => {
+  const { currentUser } = useContext(CurrentUserContext);
 
-  // Create a variable which you then set in `className` for the like button
-  const itemLikeButtonClassName = `...`;
+  const isLiked = item.likes.some((user) => user.includes(currentUser?._id));
 
   return (
     <div className="card">
-      <img
-        src={item.imageUrl}
-        alt={item.name}
-        className="card__image"
-        onClick={() => onSelectCard(item)}
-      />
-      <div className="card__name"> {item.name} </div>
+      <div>
+        <img
+          src={item.imageUrl}
+          alt={item.name}
+          className="card__image"
+          onClick={() => onSelectCard(item)}
+        />
+      </div>
 
-      <button
-        onClick={() => onCardLike(item._id, isLiked)}
-        className="card__like"
-      >
-        {" "}
-      </button>
+      <div className="card__header">
+        <div className="card__name"> {item.name} </div>
+        <div className="card__like-container">
+          {isLoggedIn ? (
+            <button
+              onClick={() => onCardLike(item._id, isLiked)}
+              className="card__like"
+            >
+              <img
+                src={isLiked ? likeButtonActive : likeButton}
+                alt="like button"
+                className="card__like"
+              />
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
     </div>
   );
 };

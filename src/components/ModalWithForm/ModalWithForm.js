@@ -1,45 +1,23 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { Modal } from "../Modal/Modal";
 import "./ModalWithForm.css";
 
-const ModalWithForm = ({
-  title,
-  children,
-  buttonText = "Add garment",
-  onClose,
-  name,
-  isOpen,
-  onSubmit,
-}) => {
+const ModalWithForm = ({ name, onClose, onSubmit, ...props }) => {
   const ref = useRef();
 
-  const handleOutsideClick = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
-      onClose();
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit();
-  };
+  // const handleOutsideClick = (e) => {
+  //   if (ref.current && !ref.current.contains(e.target)) {
+  //     onClose();
+  //   }
+  // };
 
   return (
-    <div className={`modal modal_type_${name}`} onClick={handleOutsideClick}>
-      <div className="modal__content" ref={ref}>
-        <button
-          className="modal__close-button"
-          type="button"
-          onClick={onClose}
-        ></button>
-        <h3 className="modal__title">{title}</h3>
-        <form onSubmit={handleSubmit}>
-          {children}
-          <button className="modal__button" type="submit">
-            {buttonText}
-          </button>
-        </form>
+    <Modal name={name} onClose={onClose}>
+      <div className="modal__content-form" ref={ref}>
+        <h3 className="modal__title">{props.title}</h3>
+        <form onSubmit={onSubmit}>{props.children}</form>
       </div>
-    </div>
+    </Modal>
   );
 };
 

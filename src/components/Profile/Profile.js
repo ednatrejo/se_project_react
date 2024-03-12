@@ -3,19 +3,28 @@ import "./Profile.css";
 import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 
-const Profile = ({ clothingItems, onSelectCard, onCreateModal }) => {
+const Profile = ({
+  clothingItems,
+  onSelectCard,
+  onCreateModal,
+  handleEditProfileModal,
+  onCardLike,
+  isLoggedIn,
+  handleLogout,
+}) => {
   return (
     <div className="profile">
-      <div className="profile__sidebar">
-        <SideBar />
-      </div>
-      <div>
-        <ClothesSection
-          onSelectCard={onSelectCard}
-          onCreateModal={onCreateModal}
-          clothingItems={clothingItems}
-        />
-      </div>
+      <SideBar
+        handleEditProfileModal={handleEditProfileModal}
+        handleLogout={handleLogout}
+      />
+      <ClothesSection
+        onSelectCard={onSelectCard}
+        onCreateModal={onCreateModal}
+        clothingItems={clothingItems}
+        onCardLike={onCardLike}
+        isLoggedIn={isLoggedIn}
+      />
     </div>
   );
 };

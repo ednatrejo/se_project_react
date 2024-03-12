@@ -1,17 +1,22 @@
 import { baseUrl } from "../utils/api";
 import { processServerResponse } from "../utils/Utils";
 
-export const registerUser = (name, avatar, email, password) => {
+//signup for registration
+export const registration = (email, password, name, avatar) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, avatar, email, password }),
+    body: JSON.stringify({ email, password, name, avatar }),
   }).then(processServerResponse);
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 };
 
-export const loginUser = (email, password) => {
+//signin for user authorization
+export const authorization = (email, password) => {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
@@ -21,7 +26,8 @@ export const loginUser = (email, password) => {
   }).then(processServerResponse);
 };
 
-export const getUserInfo = (token) => {
+//check token
+export const checkToken = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
@@ -29,4 +35,7 @@ export const getUserInfo = (token) => {
       authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 };
