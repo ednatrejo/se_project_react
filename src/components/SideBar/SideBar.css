@@ -1,16 +1,25 @@
 .sidebar {
   display: flex;
+
   width: 232px;
+
   height: 56px;
 }
 
 .sidebar__username {
   display: flex;
+
   align-items: center;
+
   margin-left: 16px;
+
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+
   font-size: 20px;
+
   line-height: 24.8px;
+
   font-weight: 500;
+
   color: black;
 }
