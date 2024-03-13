@@ -126,10 +126,8 @@ function App() {
       .registration(email, password, name, avatar)
       .then((newUser) => {
         setIsLoggedIn(true);
-        setCurrentUser(newUser.data);
-        handleCloseModal();
-        console.log(newUser);
       })
+
       .catch((error) => {
         console.log(error);
       });
@@ -182,33 +180,30 @@ function App() {
   // };
 
   //Checking for token
+
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-
-    if (token) {
-      setIsLoggedInLoading(true);
-      setIsLoading(true);
-
-      auth
-        .checkToken(token)
-        .then((res) => {
-          if (res) {
-            setCurrentUser(res);
-            setIsLoggedIn(true);
-          }
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      localStorage
+        .setItem("jwt", jwt)
+        .then(() => {
+          auth
+            .checkToken(jwt)
+            .then((res) => {
+              setCurrentUser(res.data);
+            })
+            .catch((err) => {
+              if (err.response && err.response.status === 401) {
+                console.error("Token expired or invalid. Logging out...");
+                handleLogout();
+              } else {
+                console.error("Error fetching user data:", err);
+              }
+            });
         })
-        .catch((error) => {
-          console.error("Error checking token:", error);
-        })
-        .finally(() => {
-          setIsLoggedInLoading(false);
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoggedInLoading(false);
-      setIsLoading(false);
+        .catch(console.error());
     }
-  }, [isLoggedIn]);
+  }, []);
 
   //Set clothing item according to weather type
   useEffect(() => {

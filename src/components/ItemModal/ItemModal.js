@@ -1,6 +1,7 @@
 import "./ItemModal.css";
 
 import React, { useContext, useRef } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 const ItemModal = ({ selectedCard, onClose, handleOpenConfirmModal }) => {
   const ref = useRef();
