@@ -123,9 +123,7 @@ function App() {
   function handleRegistration({ email, password, name, avatar }) {
     setIsLoading(true);
     auth.registration(email, password, name, avatar).then((newUser) => {
-      handleLogin({ email, password }).catch((error) => {
-        console.log(error);
-      });
+      handleLogin({ email, password }) - console.log(error);
     });
 
     //Callback function to log in user
@@ -177,15 +175,22 @@ function App() {
     //Checking for token
 
     useEffect(() => {
-      const token = localStorage.getItem("jwt");
-      if (token) {
-        setIsLoggedInLoading(true);
-        setIsLoading(true);
-      } else {
-        setIsLoggedInLoading(false);
-        setIsLoading(false);
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        localStorage.setItem("jwt", jwt);
+        auth
+          .checkToken(jwt)
+          .then((res) => {
+            if (res && res.data) {
+              setIsLoggedIn(true);
+              setCurrentUser(res.data);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-    });
+    }, []);
 
     useEffect(() => {
       const token = localStorage.getItem("jwt");
