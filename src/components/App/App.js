@@ -177,17 +177,17 @@ function App() {
     useEffect(() => {
       const jwt = localStorage.getItem("jwt");
       if (jwt) {
-        localStorage.setItem("jwt", jwt);
-        auth
-          .checkToken(jwt)
-          .then((res) => {
-            if (res && res.data) {
-              setIsLoggedIn(true);
-              setCurrentUser(res.data);
-            }
+        setToken(jwt);
+        getContent(jwt)
+          .then((userData) => {
+            console.log("userData in App.js", userData);
+            setCurrentUser(userData);
+            setIsLoggedIn(true);
+            // console.log("currentUser", currentUser);
           })
           .catch((error) => {
-            console.log(error);
+            // Handle the error (e.g., display an error message)
+            console.error(error);
           });
       }
     }, []);
