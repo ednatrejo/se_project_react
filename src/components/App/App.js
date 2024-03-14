@@ -132,16 +132,20 @@ function App() {
       auth
         .authorization(email, password)
         .then((res) => {
-          console.log("Server Response:", res);
-          setToken(res.token);
-          localStorage.setItem("jwt", res.token);
-          setIsLoggedIn(true);
-          setCurrentUser(res);
+          if (res) {
+            localStorage.setItem("jwt", res.token);
+            auth.checkToken(res.token).then((data) => {
+              setCurrentUser(data.data);
+              setIsLoggedIn(true);
+            });
+          }
           handleCloseModal();
-          history.push("/profile");
         })
-        .catch((error) => {
-          console.error(error);
+        .catch((err) => {
+          console.error("Login failed", err);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
     //Callback function to edit profile
