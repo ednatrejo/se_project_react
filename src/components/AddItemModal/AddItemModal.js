@@ -28,6 +28,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      buttonText="Add Garment"
     >
       <label>
         Name
@@ -86,6 +87,11 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
             onChange={handleWeatherChange}
           />
           <label htmlFor="cold">Cold</label>
+          <div className="button-container">
+            <button type="submit" className="add__garment-btn">
+              Add Garment
+            </button>
+          </div>
         </div>
       </div>
     </ModalWithForm>

@@ -1,22 +1,15 @@
 import { baseUrl } from "../utils/api";
 import { processServerResponse } from "../utils/Utils";
 
-//signup for registration
-export const registration = (email, password, name, avatar) => {
+export const registration = ({ email, password, name, avatar }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password, name, avatar }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, avatar, email, password }),
   }).then(processServerResponse);
-  // .catch((err) => {
-  //   console.log(err);
-  // });
 };
 
-//signin for user authorization
-export const authorization = (email, password) => {
+export const authorize = ({ email, password }) => {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
@@ -26,16 +19,25 @@ export const authorization = (email, password) => {
   }).then(processServerResponse);
 };
 
-//check token
+export const updateUser = ({ name, avatar }, token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(processServerResponse);
+};
+
 export const checkToken = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
-  // .catch((err) => {
-  //   console.log(err);
-  // });
 };
