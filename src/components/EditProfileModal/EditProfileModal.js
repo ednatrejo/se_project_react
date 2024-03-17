@@ -8,20 +8,20 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, isLoading }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({});
 
-   const [name, setName] = useState("");
-   const handleEditName = (e) => {
-     setName(e.target.value);
-   };
+  const [name, setName] = useState("");
+  const handleEditName = (e) => {
+    setName(e.target.value);
+  };
 
-   const [avatar, setAvatar] = useState("");
-   const handleEditAvatar = (e) => {
-     setAvatar(e.target.value);
-   };
+  const [avatar, setAvatar] = useState("");
+  const handleEditAvatar = (e) => {
+    setAvatar(e.target.value);
+  };
 
- useEffect(() => {
-  setName(currentUser.name ?? "");
-     setAvatar(currentUser.avatar ?? "");
-}, [isOpen]);
+  useEffect(() => {
+    setName(currentUser.name ?? "");
+    setAvatar(currentUser.avatar ?? "");
+  }, [isOpen]);
 
   useEffect(() => {
     setValues({
@@ -32,7 +32,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, isLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(values);
+    onSignUp(values);
   };
 
   return (
@@ -40,7 +40,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, isLoading }) => {
       title="Change profile data"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSignUp={handleSubmit}
     >
       <label>
         Name*

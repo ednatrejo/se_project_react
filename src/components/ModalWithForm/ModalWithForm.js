@@ -15,7 +15,7 @@ const ModalWithForm = ({ name, onClose, onSubmit, ...props }) => {
     <Modal name={name} onClose={onClose}>
       <div className="modal__content-form" ref={ref}>
         <h3 className="modal__title">{props.title}</h3>
-        <form onSubmit={onSubmit}>{props.children}</form>
+        <form onSignUp={onSignUp}>{props.children}</form>
       </div>
     </Modal>
   );
