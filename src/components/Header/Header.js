@@ -1,121 +1,92 @@
-import { useState } from "react";
-import { parseWeatherData } from "../../utils/WeatherApi";
+import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import "./Header.css";
 import headerLogo from "../../images/HeaderLogo.svg";
-import avatarImage from "../../images/avatar.svg";
-import mobileCloseButton from "../../images/Mobile-Menu-Close-Button.svg";
-import mobileNavButton from "../../images/Mobile-Nav-Button.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import UserPlaceHolder from "../UserPlaceHolder/UserPlaceHolder";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Header = ({
-  weatherData,
-  onCreateModal,
-  isLoggedIn,
-  handleRegisterModal,
-  handleLoginModal,
-}) => {
+const Header = ({ onCreateModal, setLocation, onSignUp, onLogin }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const [isMobileMenuOpened, setMobileMenuOpened] = useState(false);
-  const toggleMobileMenu = () => {
-    setMobileMenuOpened(!isMobileMenuOpened);
-  };
+  const { currentUser, loggedIn } = useContext(CurrentUserContext);
 
-  const { currentUser } = useContext(CurrentUserContext);
   return (
     <header className="header">
-      <div className="header__logo-container">
+      <div className="header__logo">
         <div>
           <Link to="/">
-            <img className="header__logo" src={headerLogo} alt="Header Logo" />
+            <img src={headerLogo} alt="logo" />
           </Link>
         </div>
-
         <div>
-          {currentDate}, {weatherData.city}
+          <div className="current__date">
+            {currentDate}, {setLocation}
+          </div>
         </div>
       </div>
-      <div className="header__nav">
+      <div className="header__signin-container">
         <ToggleSwitch />
-        {isLoggedIn ? (
-          <>
+
+        {loggedIn && (
+          <div>
             <button
-              className="header__button"
+              className="add__clothes-button"
               type="text"
               onClick={onCreateModal}
             >
               + Add Clothes
             </button>
-
-            <Link className="header__username" to="/profile">
-              {currentUser?.name}
-            </Link>
-
-            <img
-              className="header__avatar-logo"
-              src={currentUser?.avatar}
-              alt="Profile Image"
-            />
-          </>
-        ) : (
-          <>
-            <button className="header__buttons" onClick={handleRegisterModal}>
-              Sign Up
-            </button>
-            <button className="header__buttons" onClick={handleLoginModal}>
-              Log In
-            </button>
-          </>
-        )}
-      </div>
-
-      <div
-        className={`navigation-container ${
-          isMobileMenuOpened ? "mobile-menu-opened" : ""
-        }`}
-      >
-        <button onClick={toggleMobileMenu} className="menu-button">
-          {isMobileMenuOpened ? (
-            <img
-              className="mobile__close-button"
-              src={mobileCloseButton}
-              alt="Close"
-            />
-          ) : (
-            <img
-              className="mobile__nav-button"
-              src={mobileNavButton}
-              alt="Menu"
-            />
-          )}
-        </button>
-        {isMobileMenuOpened && (
-          <div className="mobile__menu">
-            <div>
-              <div className="mobile__avatar-container">
-                <div>{currentUser?.name}</div>
-                <img
-                  className="mobile__avatar-logo"
-                  src={currentUser?.avatar}
-                  alt="Avatar Logo"
-                />
-              </div>
-              <button
-                className="mobile__header__button"
-                type="text"
-                onClick={onCreateModal}
-              >
-                + Add Clothes
-              </button>
-            </div>
           </div>
         )}
+        {loggedIn ? (
+          currentUser && currentUser.name ? (
+            <Link to="/profile" className="header__avatar-name">
+              {currentUser.name}
+            </Link>
+          ) : (
+            <div>Welcome</div>
+          )
+        ) : (
+          <div>
+            <button
+              className="sign__up-button"
+              type="button"
+              onClick={onSignUp}
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
+
+        <div>
+          {loggedIn ? (
+            currentUser && currentUser.avatar ? (
+              <Link to="/profile">
+                <img
+                  src={currentUser.avatar}
+                  className="header__avatar-signedin"
+                  alt="Avatar"
+                />
+              </Link>
+            ) : (
+              <div>
+                {currentUser ? (
+                  <UserPlaceHolder userName={currentUser.name} />
+                ) : null}
+              </div>
+            )
+          ) : (
+            <div>
+              <button className="log__in-button" onClick={onLogin}>
+                Log In
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

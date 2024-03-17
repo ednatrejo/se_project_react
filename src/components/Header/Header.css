@@ -1,170 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
-  margin-bottom: 28px;
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 600;
-  color: black;
+  padding: 32px 40px 28px;
 }
 
-.header__logo-container {
+.header__logo {
   display: flex;
-  align-items: center;
   gap: 24px;
-}
-
-.header__nav {
-  display: flex;
   align-items: center;
+}
+.header__signin-container {
+  display: flex;
   gap: 12px;
+  align-items: center;
+  border: 1px;
+  border-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  margin-right: 10px;
+  box-sizing: border-box;
 }
 
-.header__button {
-  margin-right: 8px;
-  border: none;
-  background-color: transparent;
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+.current__date {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 600;
-  color: black;
 }
 
-.header__button:hover {
-  cursor: pointer;
-}
-
-.header__buttons {
-  border: none;
-  background-color: transparent;
-  font-family: "Cabinet-Grotesk", Arial, Helvetica, sans-serif;
-  font-weight: 600;
+.add__clothes-button {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  color: #000;
+  border: none;
+  outline: none;
+  background: none;
   cursor: pointer;
+  align-items: center;
 }
 
-.header__username {
+.add__clothes-button:hover {
+  color: #ff4d00;
+}
+
+.header__avatar-name {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+  color: #000;
   text-decoration: none;
-  color: black;
+  align-items: center;
 }
 
-.header__username:link {
-  color: black;
-}
-
-.header__avatar-logo {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  border: 1px;
-}
-
-.navigation-container {
-  display: none;
-}
-
-.menu-button {
-  width: 44px;
-  height: 44px;
-  /* background-image: url("../../images/Mobile\ menu-button.png"); */
-  background-repeat: no-repeat;
-  background-size: contain;
+.sign__up-button {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000;
   border: none;
-  background-color: transparent;
+  outline: none;
+  background: none;
   cursor: pointer;
+  text-decoration: none;
+  margin-left: 10px;
 }
 
-.mobile__avatar-logo {
-  border-radius: 50%;
-  width: 40px;
+.sign__up-button:hover {
+  color: #ff4d00;
+}
+
+.log__in-button {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+  color: #000;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.log__in-button:hover {
+  color: #ff4d00;
+}
+
+.header__avatar-signedin {
+  display: flex;
+  gap: 12px;
+  align-items: center;
   height: 40px;
+  width: 40px;
   border: 1px;
-}
+  border-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 
-@media screen and (min-width: 320px) and (max-width: 425px) {
-  .header {
-    align-items: flex-start;
-  }
-
-  .header__logo-container {
-    display: block;
-  }
-
-  .header__logo {
-    margin-bottom: 32px;
-  }
-
-  .navigation-container {
-    display: block;
-  }
-
-  .mobile__avatar-container {
-    display: flex;
-    gap: 10px;
-  }
-
-  .mobile-menu-opened {
-    max-width: 415px;
-    width: 100%;
-    max-height: 208px;
-    height: 100%;
-    border-radius: 11px;
-    background-color: white;
-    box-shadow: 2px 2px 4px #e0e0e0;
-    position: absolute;
-    z-index: 1;
-    left: 16px;
-    right: 16px;
-  }
-
-  .mobile__nav-button {
-    position: absolute;
-    right: 11px;
-    top: 13px;
-    cursor: pointer;
-  }
-
-  .mobile__menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .mobile__close-button {
-    position: absolute;
-    right: 11px;
-    top: 11px;
-    cursor: pointer;
-  }
-
-  .mobile__header__button {
-    border: none;
-    background-color: transparent;
-    font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 700;
-    color: black;
-    margin-top: 24px;
-    position: absolute;
-    left: 30%;
-    right: 30%;
-  }
-
-  .header__username {
-    display: none;
-  }
-
-  .header__avatar-logo {
-    display: none;
-  }
-
-  .header__button {
-    display: none;
-  }
+  box-sizing: border-box;
 }
