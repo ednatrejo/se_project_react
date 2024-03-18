@@ -7,7 +7,7 @@ const LoginModal = ({ onClose, handleRegisterModal, onSubmit, isLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignUp(values);
+    onSubmit(values);
   };
 
   return (

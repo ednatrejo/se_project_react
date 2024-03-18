@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 const RegisterModal = ({
   handleLoginModal,
   onClose,
-  onSignUp,
+  onSubmit,
   isOpen,
   isLoading,
 }) => {
@@ -17,7 +17,7 @@ const RegisterModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignUp(values);
+    onSubmit(values);
   };
 
   return (
