@@ -25,7 +25,7 @@ const RegisterModal = ({
       title="Sign Up"
       onClose={onClose}
       isOpen={isOpen}
-      onSignUp={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <label>
         Email*
