@@ -27,7 +27,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
       title="New Garment"
       onClose={onClose}
       isOpen={isOpen}
-      onSignUp={handleSubmit}
+      onSubmit={handleSubmit}
       buttonText="Add Garment"
     >
       <label>

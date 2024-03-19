@@ -273,7 +273,7 @@ function App() {
         >
           <Header
             onCreateModal={handleCreateModal}
-            onSignUp={handleSignupModal}
+            onSubmit={handleSignupModal}
             onLogin={handleLoginModal}
             temp={temp}
             setLocation={location}
@@ -295,16 +295,11 @@ function App() {
               <RegisterModal
                 onClose={handleCloseModal}
                 handleUserSubmit={handleSignUp}
-                onSignUp={handleSignupModal}
+                onSubmit={handleSignupModal}
                 isOpen={activeModal === "signup"}
               />
             </Route>
-            <Route path="/login">
-              <LoginModal
-                onClose={handleCloseModal}
-                handleUserLogin={handleLogIn}
-              />
-            </Route>
+            <Route path="/login"></Route>
             <ProtectedRoute
               path="/profile"
               loggedIn={loggedIn}
@@ -328,7 +323,7 @@ function App() {
               onClose={handleCloseModal}
               handleUserLogin={handleLogIn}
               isOpen={activeModal === "login"}
-              onSignUp={handleSignupModal}
+              onSubmit={handleSignupModal}
             />
           )}
 

@@ -6,7 +6,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import UserPlaceHolder from "../UserPlaceHolder/UserPlaceHolder";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Header = ({ onCreateModal, setLocation, onSignUp, onLogin }) => {
+const Header = ({ onCreateModal, setLocation, onSubmit, onLogin }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -55,7 +55,7 @@ const Header = ({ onCreateModal, setLocation, onSignUp, onLogin }) => {
             <button
               className="sign__up-button"
               type="button"
-              onClick={onSignUp}
+              onClick={onSubmit}
             >
               Sign Up
             </button>
