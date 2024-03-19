@@ -32,7 +32,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, isLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignUp(values);
+    onSubmit(values);
   };
 
   return (
@@ -40,7 +40,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, isLoading }) => {
       title="Change profile data"
       onClose={onClose}
       isOpen={isOpen}
-      onSignUp={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <label>
         Name*
