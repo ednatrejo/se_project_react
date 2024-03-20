@@ -323,16 +323,17 @@ function App() {
               onClose={handleCloseModal}
               handleUserLogin={handleLogIn}
               isOpen={activeModal === "login"}
-              onSubmit={handleSignupModal}
+              onSubmit={handleSignUp}
             />
           )}
 
           {activeModal === "signup" && (
             <RegisterModal
               onClose={handleCloseModal}
-              handleUserSubmit={handleSignUp}
+              //handleUserSubmit={handleSignUp}
               isOpen={activeModal === "signup"}
               onLogin={handleLoginModal}
+              onSubmit={handleSignUp}
             />
           )}
 

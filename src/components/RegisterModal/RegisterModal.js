@@ -15,7 +15,7 @@ const RegisterModal = ({
     setValues("");
   }, [isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleUserSubmit = (e) => {
     e.preventDefault();
     onSubmit(values);
   };
@@ -25,7 +25,7 @@ const RegisterModal = ({
       title="Sign Up"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSubmit={handleUserSubmit}
     >
       <label>
         Email*
