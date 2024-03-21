@@ -85,9 +85,7 @@ function App() {
       .registration(user)
       .then((newUser) => {
         setLoggedIn(true);
-        setCurrentUser(newUser.data);
-        handleCloseModal();
-        console.log(newUser);
+        handleLogIn(user);
       })
       .catch((error) => {
         console.log(error);
@@ -189,11 +187,11 @@ function App() {
       });
 
     getItems()
-      .then((items) => {
-        setClothingItems(items);
+      .then((cards) => {
+        setClothingItems(cards);
       })
       .catch((error) => {
-        console.error("Error fetching items:", error);
+        console.error(error);
       });
   }, []);
 

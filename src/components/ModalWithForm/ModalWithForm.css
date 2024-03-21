@@ -118,6 +118,18 @@ input[type="radio"]:checked + label {
 .modal__button:hover {
   opacity: 0.5;
 }
+.add__garment-btn {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: white;
+  border-radius: 4px;
+  background-color: black;
+  padding: 8px 16px 8px 16px;
+  margin-top: 32px;
+  cursor: pointer;
+}
 
 .modal__button-alt {
   width: 124px;
