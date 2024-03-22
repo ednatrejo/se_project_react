@@ -37,6 +37,7 @@ function App() {
   const [weatherId, setWeatherId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [deleteCard, setDeleteCard] = useState(false);
+  const [token, setToken] = useState("");
 
   //Handling active modals
   const handleCreateModal = () => {
@@ -118,32 +119,41 @@ function App() {
   //Callback function to register new user
   function handleRegistration({ email, password, name, avatar }) {
     setIsLoading(true);
-    auth
-      .registration(email, password, name, avatar)
-      .then((res) => {
-        console.log(res);
-        if (res) {
-          localStorage.setItem("jwt", res.token);
-          auth
-            .checkToken(res.token)
-            .then((data) => {
-              setCurrentUser(data);
-            })
-            .finally(() => {
-              setIsLoading(false);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-        handleLoginModal();
-      })
-      .catch((err) => {
-        console.error(err);
+    auth.registration(email, password, name, avatar).then((res) => {
+      handleLogin({ email, password }).catch((error) => {
+        console.error(error);
       });
+      auth
+        .checkToken(res.token)
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
   }
 
   //Callback function to log in user
+
+  /* function handleLogin({ email, password }) {
+    setIsLoading(true);
+    console.log("logging in");
+    auth
+      .authorization({ email, password })
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setToken(localStorage.getItem("jwt"));
+        setIsLoggedIn(true);
+      })
+      .then(handleCloseModal)
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }*/
+
   function handleLogin({ email, password }) {
     setIsLoading(true);
     auth
@@ -151,15 +161,18 @@ function App() {
       .then((res) => {
         if (res) {
           localStorage.setItem("jwt", res.token);
-          auth.checkToken(res.token).then((data) => {
-            setCurrentUser(data.data);
-            setIsLoggedIn(true);
-          });
+          auth
+            .checkToken(res.token)
+            .then((data) => {
+              setCurrentUser(data.data);
+              setIsLoggedIn(true);
+            })
+            .catch((error) => {});
         }
         handleCloseModal();
       })
-      .catch((err) => {
-        console.error("Login failed", err);
+      .catch((error) => {
+        console.error("Login failed", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -174,7 +187,7 @@ function App() {
         return data;
       });
     }
-    handleSubmit(makeRequest);
+    handleSubmit(makeRequest).catch((error) => {});
   }
 
   // const handleEditProfile = ({ name, avatar }) => {
@@ -195,6 +208,20 @@ function App() {
   // };
 
   //Checking for token
+  function checkTokenAndGetUser(jwt) {
+    auth
+      .checkToken(jwt)
+      .then((res) => {
+        if (res && res.data) {
+          setIsLoggedIn(true);
+          setCurrentUser(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -207,8 +234,8 @@ function App() {
             setCurrentUser(res.data);
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, []);
