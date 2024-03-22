@@ -1,49 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
-import { Link, withRouter } from "react-router-dom";
 
-const LoginModal = ({
-  onClose,
-  isOpen,
-  handleUserLogin,
-  onSignUp,
-  handleSignUpModal,
-}) => {
+const LoginModal = ({ onClose, handleRegisterModal, onSubmit, isLoading }) => {
   const { values, handleChange, setValues } = useForm({});
-  const [email, setEmail] = useState("");
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const [password, setPassword] = useState("");
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handleUserLogin({ email, password });
+    onSubmit(values);
   };
 
   return (
-    <ModalWithForm
-      className="login__modal"
-      title="Login"
-      onClose={onClose}
-      isOpen={isOpen}
-      onSubmit={handleLogin}
-    >
-      <label className="modal__label" htmlFor="email">
-        <p className="modal__header">Email</p>
+    <ModalWithForm title="Log In" onClose={onClose} onSubmit={handleSubmit}>
+      <label>
+        Email
         <input
-          id="email"
-          className="modal__input modal__input_type_login-email"
+          className="modal__input"
           type="email"
+          name="email"
+          minLength="1"
+          maxLength="30"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={values.email || ""}
           required
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -57,25 +37,22 @@ const LoginModal = ({
           placeholder="Password"
           value={values.password || ""}
           required
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
       </label>
-      <div className="button-container">
-        <button type="submit" className="modal__button">
-          Next
-        </button>
-        <div>
-          <button
-            type="button"
-            className="modal__button-alt"
-            onClick={onSignUp}
-          >
-            or Register
-          </button>
-        </div>
-      </div>
+
+      <button className="modal__button" type="submit">
+        {isLoading ? "Logging In..." : "Log In"}
+      </button>
+      <button
+        className="modal__button-alt"
+        type="button"
+        onClick={handleRegisterModal}
+      >
+        or Sign Up
+      </button>
     </ModalWithForm>
   );
 };
 
-export default withRouter(LoginModal);
+export default LoginModal;

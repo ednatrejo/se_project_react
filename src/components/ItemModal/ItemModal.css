@@ -55,7 +55,7 @@
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 500;
   color: black;
   margin-left: 32px;
   margin-bottom: 32px;
@@ -71,16 +71,23 @@
   margin-top: 12px;
 }
 
-.modal__delete-button_visible {
+.item__delete-button {
   margin-right: 32px;
   border: none;
+}
+
+.item__delete-button_visible {
   background-color: transparent;
   font-family: "CabinetGrotesk-M", Arial, sans-serif;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 500;
   color: rgba(255, 77, 0, 1);
   cursor: pointer;
+}
+
+.item__delete-button_hidden {
+  display: none;
 }
 
 .modal__confirm-button {

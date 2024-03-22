@@ -59,19 +59,5 @@ export const weatherOptions = [
     type: "storm-night",
   },
 ];
-/*const WeatherCard = ({ day, type, weatherTemp = 0 }) => {
-  const imageSrc = weatherOptions.filter((i) => {
-    return i.day === day && i.type === type;
-  });
 
-  const imageSrcUrl = imageSrc[0].url || "";
-
-  return (
-    <section className="weather" id="weather">
-      <div className="weather_info">{weatherTemp?.temperature?.F} F</div>
-      <img src={imageSrcUrl} className="weather_image" alt="weather" />
-    </section>
-  );
-};
-
-export default WeatherCard; */
+export const currentTime = Date.now();
