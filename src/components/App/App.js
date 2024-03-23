@@ -119,22 +119,15 @@ function App() {
   //Callback function to register new user
   function handleRegistration({ email, password, name, avatar }) {
     setIsLoading(true);
-    auth.registration(email, password, name, avatar).then((res) => {
-      handleLogin({ email, password }).catch((error) => {
+    auth
+      .registration(email, password, name, avatar)
+      .then((res) => {
+        handleLogin({ email, password });
+        console.error(error);
+      })
+      .catch((error) => {
         console.error(error);
       });
-      auth
-        .checkToken(res.token)
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
   }
 
   //Callback function to log in user
