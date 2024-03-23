@@ -123,10 +123,9 @@ function App() {
       .registration(email, password, name, avatar)
       .then((res) => {
         handleLogin({ email, password });
-        console.error(error);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        console.error(err);
       });
   }
 
