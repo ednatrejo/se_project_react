@@ -131,7 +131,7 @@ function App() {
 
   //Callback function to log in user
 
-  /* function handleLogin({ email, password }) {
+  function handleLogin({ email, password }) {
     setIsLoading(true);
     console.log("logging in");
     auth
@@ -144,9 +144,9 @@ function App() {
       .then(handleCloseModal)
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
-  }*/
+  }
 
-  function handleLogin({ email, password }) {
+  /*function handleLogin({ email, password }) {
     setIsLoading(true);
     auth
       .authorization(email, password)
@@ -169,7 +169,7 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  } */
 
   //Callback function to edit profile
   function handleEditProfile({ name, avatar }) {
