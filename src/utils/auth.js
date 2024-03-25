@@ -16,7 +16,10 @@ export const registration = (email, password, name, avatar) => {
 };
 
 //signin for user authorization
-export const authorization = (email, password) => {
+
+export const authorization = ({ email, password }) => {
+  console.log("signIn step");
+  // console.log("signIn", { email, password });
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
