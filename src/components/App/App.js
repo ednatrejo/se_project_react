@@ -138,8 +138,8 @@ function App() {
       .authorization({ email, password })
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        setToken(localStorage.getItem("jwt"));
-        setIsLoggedIn(true);
+        setToken(res.token);
+        checkTokenAndGetUser(res.token);
       })
       .then(handleCloseModal)
       .catch((err) => console.log(err))
@@ -218,17 +218,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       localStorage.setItem("jwt", jwt);
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          if (res && res.data) {
-            setIsLoggedIn(true);
-            setCurrentUser(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      checkTokenAndGetUser(jwt);
     }
   }, []);
 
