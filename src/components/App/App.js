@@ -179,7 +179,7 @@ function App() {
         return data;
       });
     }
-    handleSubmit(makeRequest).catch((error) => {});
+    handleSubmit(makeRequest);
   }
 
   // const handleEditProfile = ({ name, avatar }) => {
