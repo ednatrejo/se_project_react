@@ -2,7 +2,7 @@ import { processServerResponse } from "./Utils";
 
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://api.wtwr.switchestudio.com"
+    ? "https://api.edna.twilightparadox.com"
     : "http://localhost:3001";
 
 export const getItems = () => {
