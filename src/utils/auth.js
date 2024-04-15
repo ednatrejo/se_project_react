@@ -1,11 +1,6 @@
 import { baseUrl } from "../utils/api";
 import { processServerResponse } from "../utils/Utils";
 
-export const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://api.edna.twilightparadox.com"
-    : "http://localhost:3001";
-
 //signup for registration
 export const registration = (email, password, name, avatar) => {
   return fetch(`${baseUrl}/signup`, {
