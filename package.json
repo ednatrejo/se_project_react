@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "deploy": "npm run build && scp -r ./build/*  trejo.edna1379@edna.twilightparadox.com:/home/edna.trejo1379/frontend",
+    "deploy": "npm run build && scp -r ./build/*  trejo_edna1379@edna.twilightparadox.com:/home/edna_trejo1379/frontend",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
